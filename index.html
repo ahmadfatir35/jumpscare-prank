@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Video Seru</title>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#0f172a;color:#e2e8f0;text-align:center;padding:40px}
+    h1{margin-bottom:10px}
+    .thumb{width:80%;max-width:500px;border-radius:10px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:.3s}
+    .overlay.show{visibility:visible;opacity:1}
+    video{max-width:100%;max-height:100%;border-radius:8px}
+    .close{position:absolute;top:20px;right:20px;background:#ef4444;color:white;border:none;padding:10px 14px;border-radius:6px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <h1>Video Lucu — Klik untuk nonton</h1>
+  <p>Klik gambar di bawah untuk memutar video!</p>
+  <img src="thumb.jpg" alt="Thumbnail" class="thumb" id="thumb">
+
+  <div class="overlay" id="overlay">
+    <button class="close" id="close">X</button>
+    <video id="video" playsinline>
+      <source src="jumpscare.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    const thumb = document.getElementById('thumb');
+    const overlay = document.getElementById('overlay');
+    const video = document.getElementById('video');
+    const close = document.getElementById('close');
+
+    thumb.onclick = async () => {
+      overlay.classList.add('show');
+      try {
+        video.currentTime = 0;
+        await video.play();
+      } catch (e) { console.log(e); }
+    };
+
+    close.onclick = () => {
+      video.pause();
+      overlay.classList.remove('show');
+    };
+  </script>
+</body>
+</html>
